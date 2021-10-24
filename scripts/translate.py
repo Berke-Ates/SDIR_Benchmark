@@ -5,7 +5,7 @@ import subprocess
 import json
 from dace import SDFG
 
-result = subprocess.run(['../mlir-dace/build/bin/sdir-translate', '--mlir-to-sdfg', 
+result = subprocess.run(['sdir-translate', '--mlir-to-sdfg', 
                         "../benchmarks/sdir_2mm.mlir"], stdout=subprocess.PIPE)
 
 if(result.returncode != 0):
