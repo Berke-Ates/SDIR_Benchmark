@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # This script installs all the dependencies needed to run the benchmarks
+set -e # Stop on error
 cd $(dirname $0)/.. #navigate to root of repo
 
 # Install CLI Tools
