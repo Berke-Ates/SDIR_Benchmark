@@ -6,9 +6,9 @@ cd $(dirname $0)/.. #navigate to root of repo
 
 # Install CLI Tools
 sudo apt update
-sudo apt install python3
-sudo apt install cmake
-sudo apt install ninja-build
+sudo apt -y install python3
+sudo apt -y install cmake
+sudo apt -y install ninja-build
 
 # Install MLIR
 git clone --depth 1 https://github.com/llvm/llvm-project
