@@ -78,4 +78,4 @@ git checkout origin/mlir_tasklet &> $out
 echo -ne "\r\e[K"
 echo -e "\u2705 Cloned DaCe"
 
-
+cd ..
