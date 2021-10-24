@@ -9,6 +9,7 @@ sudo apt update
 sudo apt -y install python3
 sudo apt -y install cmake
 sudo apt -y install ninja-build
+sudo apt -y install clang
 
 # Install MLIR
 git clone --depth 1 https://github.com/llvm/llvm-project
