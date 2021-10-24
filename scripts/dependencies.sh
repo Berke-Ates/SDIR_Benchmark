@@ -6,6 +6,8 @@ cd $(dirname $0)/.. #navigate to root of repo
 
 # Install CLI Tools
 sudo apt update
+sudo apt install python3
+sudo apt install cmake
 sudo apt install ninja-build
 
 # Install MLIR

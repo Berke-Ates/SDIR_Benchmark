@@ -2,7 +2,7 @@
 
 # This script runs the affine.for benchmark
 
-cd $(dirname $0) #navigate to this folder
+cd $(dirname $0) # navigate to this folder
 
 clean(){
     rm -f ".tempfile.affine.mlir"
