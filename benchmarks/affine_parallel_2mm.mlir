@@ -31,16 +31,16 @@ module {
     func @init_array(%A : memref<?x?xf64>, %B : memref<?x?xf64>, %C : memref<?x?xf64>, %D : memref<?x?xf64>, 
                      %ni: index, %nj: index, %nk: index, %nl: index) 
     {
-        %1 = constant 1 : index
-        %2 = constant 2 : index
-        %3 = constant 3 : index
+        %1 = arith.constant 1 : index
+        %2 = arith.constant 2 : index
+        %3 = arith.constant 3 : index
 
         affine.parallel (%i, %j) = (0, 0) to (%ni, %nk) {
-            %ij = muli %i, %j : index
-            %ij_1 = addi %ij, %1 : index
+            %ij = arith.muli %i, %j : index
+            %ij_1 = arith.addi %ij, %1 : index
 
-            %ij_1_64 = index_cast %ij_1 : index to i64
-            %ni_64 = index_cast %ni : index to i64
+            %ij_1_64 = arith.index_cast %ij_1 : index to i64
+            %ni_64 = arith.index_cast %ni : index to i64
 
             %rem = llvm.urem %ij_1_64, %ni_64 : i64
             %rem_f = llvm.bitcast %rem : i64 to f64
@@ -51,11 +51,11 @@ module {
         }
 
         affine.parallel (%i, %j) = (0, 0) to (%nk, %nj) {
-            %j_1 = addi %j, %1 : index
-            %ij_1 = muli %i, %j_1 : index
+            %j_1 = arith.addi %j, %1 : index
+            %ij_1 = arith.muli %i, %j_1 : index
 
-            %ij_1_64 = index_cast %ij_1 : index to i64
-            %nj_64 = index_cast %nj : index to i64
+            %ij_1_64 = arith.index_cast %ij_1 : index to i64
+            %nj_64 = arith.index_cast %nj : index to i64
 
             %rem = llvm.urem %ij_1_64, %nj_64 : i64
             %rem_f = llvm.bitcast %rem : i64 to f64
@@ -66,12 +66,12 @@ module {
         }
 
         affine.parallel (%i, %j) = (0, 0) to (%nj, %nl) {
-            %j_3 = addi %j, %3 : index
-            %ij_3 = muli %i, %j_3 : index
-            %ij_3_1 = addi %ij_3, %1 : index
+            %j_3 = arith.addi %j, %3 : index
+            %ij_3 = arith.muli %i, %j_3 : index
+            %ij_3_1 = arith.addi %ij_3, %1 : index
 
-            %ij_3_1_64 = index_cast %ij_3_1 : index to i64
-            %nl_64 = index_cast %nl : index to i64
+            %ij_3_1_64 = arith.index_cast %ij_3_1 : index to i64
+            %nl_64 = arith.index_cast %nl : index to i64
 
             %rem = llvm.urem %ij_3_1_64, %nl_64 : i64
             %rem_f = llvm.bitcast %rem : i64 to f64
@@ -82,11 +82,11 @@ module {
         }
 
         affine.parallel (%i, %j) = (0, 0) to (%ni, %nl) {
-            %j_2 = addi %j, %2 : index
-            %ij_2 = muli %i, %j_2 : index
+            %j_2 = arith.addi %j, %2 : index
+            %ij_2 = arith.muli %i, %j_2 : index
 
-            %ij_2_64 = index_cast %ij_2 : index to i64
-            %nk_64 = index_cast %nk : index to i64
+            %ij_2_64 = arith.index_cast %ij_2 : index to i64
+            %nk_64 = arith.index_cast %nk : index to i64
 
             %rem = llvm.urem %ij_2_64, %nk_64 : i64
             %rem_f = llvm.bitcast %rem : i64 to f64
@@ -103,7 +103,7 @@ module {
                      %ni: index, %nj: index, %nk: index, %nl: index, %alpha: f64, %beta: f64) 
     {   
         affine.parallel (%i, %j) = (0, 0) to (%ni, %nj) {
-            %0 = constant 0.0 : f64
+            %0 = arith.constant 0.0 : f64
             memref.store %0, %tmp[%i, %j] : memref<?x?xf64>
 
             affine.for %k = 0 to %nk {
@@ -111,16 +111,16 @@ module {
                 %B_v = memref.load %B[%k, %j] : memref<?x?xf64>
                 %tmp_v = memref.load %tmp[%i, %j] : memref<?x?xf64>
 
-                %AB_v = mulf %A_v, %B_v : f64
-                %AB_a = mulf %alpha, %AB_v : f64
-                %res = addf %tmp_v, %AB_a : f64
+                %AB_v = arith.mulf %A_v, %B_v : f64
+                %AB_a = arith.mulf %alpha, %AB_v : f64
+                %res = arith.addf %tmp_v, %AB_a : f64
                 memref.store %res, %tmp[%i, %j] : memref<?x?xf64>
             }
         }
 
         affine.parallel (%i, %j) = (0, 0) to (%ni, %nl) {
             %D_v = memref.load %D[%i, %j] : memref<?x?xf64>
-            %D_b = mulf %D_v, %beta : f64
+            %D_b = arith.mulf %D_v, %beta : f64
             memref.store %D_b, %D[%i, %j] : memref<?x?xf64>
 
             affine.for %k = 0 to %nj {
@@ -128,8 +128,8 @@ module {
                 %C_v = memref.load %C[%k, %j] : memref<?x?xf64>
                 %D_v2 = memref.load %D[%i, %j] : memref<?x?xf64>
 
-                %tmpC_v = mulf %tmp_v, %C_v : f64
-                %res = addf %D_v2, %tmpC_v : f64
+                %tmpC_v = arith.mulf %tmp_v, %C_v : f64
+                %res = arith.addf %D_v2, %tmpC_v : f64
                 memref.store %res, %D[%i, %j] : memref<?x?xf64>
             }
         }
@@ -137,13 +137,13 @@ module {
     }
 
     func @main() -> i32 {
-        %ni = constant 800 : index
-        %nj = constant 900 : index
-        %nk = constant 1100 : index
-        %nl = constant 1200 : index
+        %ni = arith.constant 800 : index
+        %nj = arith.constant 900 : index
+        %nk = arith.constant 1100 : index
+        %nl = arith.constant 1200 : index
 
-        %alpha = constant 1.5 : f64
-        %beta = constant 1.2 : f64
+        %alpha = arith.constant 1.5 : f64
+        %beta = arith.constant 1.2 : f64
 
         %A = memref.alloc(%ni, %nk) : memref<?x?xf64>
         %B = memref.alloc(%nk, %nj) : memref<?x?xf64>
@@ -157,17 +157,17 @@ module {
         call @kernel_2mm(%tmp, %A, %B, %C, %D, %ni, %nj, %nk, %nl, %alpha, %beta) : (memref<?x?xf64>,memref<?x?xf64>,memref<?x?xf64>,memref<?x?xf64>,memref<?x?xf64>,index,index,index,index,f64,f64) -> ()
         %t_1 = call @get_time() : () -> i64
 
-        %t_e = subi %t_1, %t_0 : i64
-        %mtm = constant 1000 : i64
+        %t_e = arith.subi %t_1, %t_0 : i64
+        %mtm = arith.constant 1000 : i64
         %t_e_ms = llvm.udiv %t_e, %mtm  : i64
         call @print_int(%t_e_ms) : (i64) -> ()
 
-        %i = constant 0 : index
-        %j = constant 0 : index
-        %n = memref.load %D[%i,%j] : memref<?x?xf64>
-        call @print_float(%n) : (f64) -> ()
+        //%i = arith.constant 0 : index
+        //%j = arith.constant 0 : index
+        //%n = memref.load %D[%i,%j] : memref<?x?xf64>
+        //call @print_float(%n) : (f64) -> ()
 
-        %0 = constant 0 : i32
+        %0 = arith.constant 0 : i32
         return %0 : i32
     }
 }

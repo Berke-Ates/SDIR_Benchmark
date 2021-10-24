@@ -31,7 +31,7 @@ module {
 
         sdir.state @call_12 {
             sdir.tasklet{} @get_0() -> f64 {
-                %0 = constant 0.0 : f64
+                %0 = arith.constant 0.0 : f64
                 sdir.return %0 : f64
             }
 
@@ -44,17 +44,17 @@ module {
 
         sdir.state @slice_tmp_14 {
             sdir.tasklet{} @multA(%a: f64, %b: f64) -> f64 {
-                %c = mulf %a, %b: f64
+                %c = arith.mulf %a, %b: f64
                 sdir.return %c : f64
             }
 
             sdir.tasklet{} @multB(%a: f64, %b: f64) -> f64 {
-                %c = mulf %a, %b: f64
+                %c = arith.mulf %a, %b: f64
                 sdir.return %c : f64
             }
 
             sdir.tasklet{} @add(%a: f64, %b: f64) -> f64 {
-                %c = addf %a, %b: f64
+                %c = arith.addf %a, %b: f64
                 sdir.return %c : f64
             }
 
@@ -84,7 +84,7 @@ module {
 
         sdir.state @slice_D_18 {
             sdir.tasklet{} @mult(%a: f64, %b: f64) -> f64 {
-                %c = mulf %a, %b: f64
+                %c = arith.mulf %a, %b: f64
                 sdir.return %c : f64
             }
 
@@ -103,12 +103,12 @@ module {
 
         sdir.state @slice_D_20 {
             sdir.tasklet{} @mult(%a: f64, %b: f64) -> f64 {
-                %c = mulf %a, %b: f64
+                %c = arith.mulf %a, %b: f64
                 sdir.return %c : f64
             }
 
             sdir.tasklet{} @add(%a: f64, %b: f64) -> f64 {
-                %c = addf %a, %b: f64
+                %c = arith.addf %a, %b: f64
                 sdir.return %c : f64
             }
 

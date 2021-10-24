@@ -3,6 +3,7 @@
 # This script runs the affine.parallel benchmark
 
 cd $(dirname $0) # navigate to this folder
+echo -n "Running affine.parallel benchmark"
 
 #--scf-for-to-while
 mlir-opt --lower-affine --convert-scf-to-std "../benchmarks/affine_parallel_2mm.mlir" > "../gen/affine_parallel_std.mlir"
@@ -15,6 +16,10 @@ llc -O3 -march=x86-64 -relocation-model=pic -filetype=obj "../gen/affine_paralle
 
 clang -O3 "../gen/affine_parallel.o" -o "../gen/affine_parallel.out"
 
-../gen/affine_parallel.out
+for i in {1..3}
+do
+  ../gen/affine_parallel.out >> "../logs/affine_parallel_benchmark.log"
+done
 
-
+echo -ne "\r\e[K"
+echo -e "\u2705 affine.parallel benchmark done!"
