@@ -4,39 +4,17 @@
 
 cd $(dirname $0) # navigate to this folder
 
-clean(){
-    rm -f ".tempfile.affine.mlir"
-    rm -f ".tempfile.mlir"
-    rm -f ".tempfile.ll"
-    rm -f ".tempfile.o"
-    rm -f ".tempfile.out"
-    echo $2
-    exit $1
-}
-
-check(){
-    if [ $1 -ne 0 ]; then
-        clean 1 "$2"
-    fi
-}
-
 #--scf-for-to-while
-mlir-opt --lower-affine --convert-scf-to-std $1 > ".tempfile.affine.mlir"
-check $? "Lowering affine failed"
+mlir-opt --lower-affine --convert-scf-to-std "../benchmarks/affine_parallel_2mm.mlir" > "../gen/affine_parallel_std.mlir"
 
-mlir-opt --lower-host-to-llvm ".tempfile.affine.mlir" > ".tempfile.mlir"
-check $? "Lowering failed"
+mlir-opt --lower-host-to-llvm "../gen/affine_parallel_std.mlir" > "../gen/affine_parallel_llvm.mlir"
 
-mlir-translate --mlir-to-llvmir ".tempfile.mlir" > ".tempfile.ll"
-check $? "Translation failed"
+mlir-translate --mlir-to-llvmir "../gen/affine_parallel_llvm.mlir" > "../gen/affine_parallel.ll"
 
-llc -O3 -march=x86-64 -relocation-model=pic -filetype=obj ".tempfile.ll" -o ".tempfile.o"
-check $? "LLC failed"
+llc -O3 -march=x86-64 -relocation-model=pic -filetype=obj "../gen/affine_parallel.ll" -o "../gen/affine_parallel.o"
 
-clang -O3 ".tempfile.o" -o ".tempfile.out"
-check $? "Clang failed"
+clang -O3 "../gen/affine_parallel.o" -o "../gen/affine_parallel.out"
 
-./.tempfile.out
-clean 0 ""
+../gen/affine_parallel.out
 
 

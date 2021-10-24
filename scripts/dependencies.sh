@@ -20,7 +20,8 @@ cmake --build . --target check-mlir
 cd ../../
 
 # Install SDIR
-git clone --depth 1 https://github.com/spcl/mlir-dace/tree/sdir-to-sdfg-translation
+git clone --depth 1 https://github.com/spcl/mlir-dace
+git checkout sdir-to-sdfg-translation
 mkdir mlir-dace/build 
 cd mlir-dace/build
 cmake -G Ninja .. -DMLIR_DIR=../../llvm-project/build/lib/cmake/mlir -DLLVM_EXTERNAL_LIT=../../llvm-project/build/bin/llvm-lit
