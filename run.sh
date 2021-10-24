@@ -15,7 +15,8 @@ chmod -R +x scripts/ # enable execution of all scripts
 mkdir -p logs
 mkdir -p gen
 
-source scripts/dependencies.sh
+scripts/dependencies.sh
+source scripts/envVars.sh
 scripts/test_c.sh 
 scripts/test_affine_for.sh 
 scripts/test_affine_parallel.sh 

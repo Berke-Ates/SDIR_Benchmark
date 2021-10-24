@@ -39,7 +39,6 @@ else
     echo -e "\u274c MLIR failed"
 fi
 
-export PATH="$PATH:$PWD/bin" 
 cd ../../
 
 # Install SDIR
@@ -78,8 +77,5 @@ cd dace
 git checkout origin/mlir_tasklet &> $out
 echo -ne "\r\e[K"
 echo -e "\u2705 Cloned DaCe"
-
-export PYTHONPATH="$PWD/dace"
-cd ..
 
 
