@@ -3,7 +3,7 @@
 # This script runs the C benchmark
 
 cd $(dirname $0) # navigate to this folder
-echo -n "Running C benchmark"
+echo -n "Running C benchmark..."
 
 clang "../benchmarks/C_2mm_builtin.c" -DPOLYBENCH_TIME -o "../gen/c_bench.out"
 
@@ -13,4 +13,4 @@ do
 done
 
 echo -ne "\r\e[K"
-echo -e "\u2705 C benchmark done!"
+echo -e "\u2705 C benchmark"

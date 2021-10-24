@@ -3,7 +3,7 @@
 # This script runs the affine.parallel benchmark
 
 cd $(dirname $0) # navigate to this folder
-echo -n "Running affine.parallel benchmark"
+echo -n "Running affine.parallel benchmark..."
 
 #--scf-for-to-while
 mlir-opt --lower-affine --convert-scf-to-std "../benchmarks/affine_parallel_2mm.mlir" > "../gen/affine_parallel_std.mlir"
@@ -22,4 +22,4 @@ do
 done
 
 echo -ne "\r\e[K"
-echo -e "\u2705 affine.parallel benchmark done!"
+echo -e "\u2705 affine.parallel benchmark"

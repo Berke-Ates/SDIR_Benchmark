@@ -3,7 +3,7 @@
 # This script runs the affine.for benchmark
 
 cd $(dirname $0) # navigate to this folder
-echo -n "Running affine.for benchmark"
+echo -n "Running affine.for benchmark..."
 
 #--scf-for-to-while
 mlir-opt --lower-affine --convert-scf-to-std "../benchmarks/affine_for_2mm.mlir" > "../gen/affine_for_std.mlir"
@@ -22,4 +22,4 @@ do
 done
 
 echo -ne "\r\e[K"
-echo -e "\u2705 affine.for benchmark done!"
+echo -e "\u2705 affine.for benchmark"
