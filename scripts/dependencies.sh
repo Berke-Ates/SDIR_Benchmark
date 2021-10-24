@@ -10,7 +10,7 @@ out=/dev/null
 echo -n "Installing CLI tools..."
 sudo apt-get update &> $out
 sudo apt-get -y install python3 pip cmake ninja-build clang lld &> $out
-pip install dace &> $out
+pip install pymlir &> $out
 echo -ne "\r\e[K"
 echo -e "\u2705 Installed CLI tools"
 
