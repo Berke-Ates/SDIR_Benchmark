@@ -49,8 +49,8 @@ if __name__ == '__main__':
         obj(ni,nj,nk,nl,tmp,A,B,C,D,alpha,beta)
         t_d = datetime.datetime.now() - t_0
         
-        with open("../logs/sdir.log", "a") as logfile:
-            logfile.write(round(t_d.total_seconds()*1000))
+        with open("../logs/sdir_benchmark.log", "a") as logfile:
+            logfile.write(str(round(t_d.total_seconds()*1000)) + "\n")
 
         #print(round(t_d.total_seconds()*1000), " ms")
         #print(round(D[0,0],6)) # Same precision as mlir

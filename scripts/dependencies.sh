@@ -74,6 +74,7 @@ cd ../../
 echo -n "Cloning DaCe..."
 git clone https://github.com/Berke-Ates/dace &> $out
 cd dace
+git submodule update --init --recursive
 git checkout origin/mlir_tasklet &> $out
 pip install -r requirements.txt
 echo -ne "\r\e[K"
