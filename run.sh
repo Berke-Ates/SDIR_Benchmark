@@ -4,12 +4,6 @@
 
 cd $(dirname $0) # navigate to the folder of this script
 
-if [[ $UID != 0 ]]; then
-    echo "Please run this script with sudo:"
-    echo "sudo $0 $*"
-    exit 1
-fi
-
 # enable execution of all scripts
 chmod +x scripts/dependencies.sh
 chmod +x scripts/envVars.sh
