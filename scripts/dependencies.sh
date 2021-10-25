@@ -52,7 +52,7 @@ echo -e "\u2705 Cloned SDIR"
 echo -n "Building SDIR..."
 mkdir -p build
 cd build
-cmake -G Ninja .. -DMLIR_DIR="$PWD/../llvm-project/build/lib/cmake/mlir" -DLLVM_EXTERNAL_LIT="$PWD/../../llvm-project/build/bin/llvm-lit" &> $out
+cmake -G Ninja .. -DMLIR_DIR="$PWD/../../llvm-project/build/lib/cmake/mlir" -DLLVM_EXTERNAL_LIT="$PWD/../../llvm-project/build/bin/llvm-lit" &> $out
 cmake --build . &> $out
 echo -ne "\r\e[K"
 echo -e "\u2705 Built SDIR"
