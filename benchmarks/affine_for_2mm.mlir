@@ -2,7 +2,7 @@
 
 module {
     llvm.mlir.global private unnamed_addr constant @".strF"("%f\0A\00") {alignment = 1 : i64}
-    llvm.mlir.global private unnamed_addr constant @".strI"("%d ms\0A\00") {alignment = 1 : i64}
+    llvm.mlir.global private unnamed_addr constant @".strI"("%d\0A\00") {alignment = 1 : i64}
    
     llvm.func @printf(!llvm.ptr<i8>, ...) -> i32
     llvm.func @clock() -> i64
@@ -17,8 +17,8 @@ module {
 
     func @print_int(%19: i64) {
         %0 = llvm.mlir.constant(0 : i64) : i64
-        %1 = llvm.mlir.addressof @".strI" : !llvm.ptr<array<7 x i8>>
-        %2 = llvm.getelementptr %1[%0, %0] : (!llvm.ptr<array<7 x i8>>, i64, i64) -> !llvm.ptr<i8>
+        %1 = llvm.mlir.addressof @".strI" : !llvm.ptr<array<4 x i8>>
+        %2 = llvm.getelementptr %1[%0, %0] : (!llvm.ptr<array<4 x i8>>, i64, i64) -> !llvm.ptr<i8>
         %20 = llvm.call @printf(%2, %19) : (!llvm.ptr<i8>, i64) -> i32
         return
     }
