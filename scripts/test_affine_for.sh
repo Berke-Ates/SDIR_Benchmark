@@ -21,6 +21,3 @@ for i in {1..3}
 do
   ../gen/affine_for.out >> "../logs/affine_for_benchmark.log"
 done
-
-#echo -ne "\r\e[K"
-#echo -e "\u2705 affine.for benchmark"
