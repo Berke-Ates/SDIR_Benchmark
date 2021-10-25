@@ -4,8 +4,7 @@ import dace
 import sys
 import json
 import datetime
-import dace.transformation.interstate 
-import dace.transformation.dataflow 
+from dace.transformation.auto.auto_optimize import auto_optimize
 
 def init_arrays(ni,nj,nk,nl,A,B,C,D):
     for i in range(ni):
@@ -42,19 +41,16 @@ if __name__ == '__main__':
     translated_json = json.load(file)
     sdfg = dace.SDFG.from_json(translated_json)
 
-    #sdfg.apply_transformations_repeated(
-    #    xforms= [
-    #                #dace.transformation.interstate.StateFusion,
-    #                dace.transformation.interstate.LoopToMap,
-    #                #dace.transformation.dataflow.TrivialTaskletElimination,
-    #            ], 
-    #    strict=True)
-
+    auto_optimize(sdfg, dace.DeviceType.CPU)
     obj = sdfg.compile()
 
-    t_0 = datetime.datetime.now()
-    obj(ni,nj,nk,nl,tmp,A,B,C,D,alpha,beta)
-    t_d = datetime.datetime.now() - t_0
+    for i in range(3):
+        t_0 = datetime.datetime.now()
+        obj(ni,nj,nk,nl,tmp,A,B,C,D,alpha,beta)
+        t_d = datetime.datetime.now() - t_0
+        
+        with open("../logs/sdir.log", "a") as logfile:
+            logfile.write(round(t_d.total_seconds()*1000))
 
-    print(round(t_d.total_seconds()*1000), " ms")
-    print(round(D[0,0],6)) # Same precision as mlir
+        #print(round(t_d.total_seconds()*1000), " ms")
+        #print(round(D[0,0],6)) # Same precision as mlir

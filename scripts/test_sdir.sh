@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # This script runs the SDIR benchmark
+# Logs ms
 
 cd $(dirname $0) # navigate to this folder
 echo -n "Running SDIR benchmark..."

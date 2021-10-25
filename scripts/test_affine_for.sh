@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # This script runs the affine.for benchmark
+# Logs ms 
 
 cd $(dirname $0) # navigate to this folder
 echo -n "Running affine.for benchmark..."

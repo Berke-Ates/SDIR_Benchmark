@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # This script runs the C benchmark
+# Logs seconds
 
 cd $(dirname $0) # navigate to this folder
 echo -n "Running C benchmark..."
