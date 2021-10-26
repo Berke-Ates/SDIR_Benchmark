@@ -13,4 +13,4 @@ do
   ../gen/c_bench.out >> "../logs/c_benchmark.log"
 done
 
-python3 convert-ms.py
+python3 convert_ms.py
