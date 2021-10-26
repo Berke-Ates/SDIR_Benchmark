@@ -4,7 +4,6 @@ import dace
 import sys
 import json
 import datetime
-from dace.transformation.auto.auto_optimize import auto_optimize
 
 def init_arrays(ni,nj,nk,nl,A,B,C,D):
     for i in range(ni):
@@ -37,11 +36,9 @@ if __name__ == '__main__':
 
     init_arrays(ni, nj, nk, nl, A, B, C, D)
 
-    file = open("../gen/sdir_2mm.sdfg")
+    file = open("../gen/sdir_2mm_opt.sdfg")
     translated_json = json.load(file)
     sdfg = dace.SDFG.from_json(translated_json)
-
-    auto_optimize(sdfg, dace.DeviceType.CPU)
     obj = sdfg.compile()
 
     for i in range(100):
