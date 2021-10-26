@@ -11,8 +11,8 @@ mlir-opt --affine-loop-unroll-jam "gen/${name}_opt1.mlir" > "gen/${name}_opt2.ml
 mlir-opt --affine-loop-invariant-code-motion "gen/${name}_opt2.mlir" > "gen/${name}_opt3.mlir"
 mlir-opt --affine-super-vectorize "gen/${name}_opt3.mlir" > "gen/${name}_opt4.mlir"
 mlir-opt --affine-loop-normalize "gen/${name}_opt4.mlir" > "gen/${name}_opt5.mlir"
-mlir-opt --affine-loop-fusion "gen/${name}_opt5.mlir" > "gen/${name}_opt6.mlir"
-mlir-opt --affine-parallelize "gen/${name}_opt6.mlir" > "gen/${name}_opt7.mlir"
+mlir-opt --affine-parallelize "gen/${name}_opt5.mlir" > "gen/${name}_opt6.mlir"
+mlir-opt --affine-loop-fusion "gen/${name}_opt6.mlir" > "gen/${name}_opt7.mlir"
 mlir-opt --lower-affine "gen/${name}_opt7.mlir" > "gen/${name}_scf.mlir"
 
 # scf passes
