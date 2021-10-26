@@ -17,11 +17,11 @@ module {
         %alpha = sdir.alloc{name="alpha"}() : !sdir.array<f64>
         %beta = sdir.alloc{name="beta"}() : !sdir.array<f64>
 
-        %tmp = sdir.alloc{name="tmp"}() : !sdir.array<800x900xf64>
-        %A = sdir.alloc{name="A"}() : !sdir.array<800x1100xf64>
-        %B = sdir.alloc{name="B"}() : !sdir.array<1100x900xf64>
-        %C = sdir.alloc{name="C"}() : !sdir.array<900x1200xf64>
-        %D = sdir.alloc{name="D"}() : !sdir.array<800x1200xf64>
+        %tmp = sdir.alloc{name="tmp"}() : !sdir.array<1600x1800xf64>
+        %A = sdir.alloc{name="A"}() : !sdir.array<1600x2200xf64>
+        %B = sdir.alloc{name="B"}() : !sdir.array<2200x1800xf64>
+        %C = sdir.alloc{name="C"}() : !sdir.array<1800x2400xf64>
+        %D = sdir.alloc{name="D"}() : !sdir.array<1600x2400xf64>
 
         sdir.state @init {}
 
@@ -35,9 +35,9 @@ module {
                 sdir.return %0 : f64
             }
 
-            %tmp_a = sdir.get_access %tmp : !sdir.array<800x900xf64> -> !sdir.memlet<800x900xf64>
+            %tmp_a = sdir.get_access %tmp : !sdir.array<1600x1800xf64> -> !sdir.memlet<1600x1800xf64>
             %0 = sdir.call @get_0() : () -> f64
-            sdir.store %0, %tmp_a[sym("i1"), sym("j1")] : f64 -> !sdir.memlet<800x900xf64>
+            sdir.store %0, %tmp_a[sym("i1"), sym("j1")] : f64 -> !sdir.memlet<1600x1800xf64>
         }
 
         sdir.state @guard {}
@@ -58,22 +58,22 @@ module {
                 sdir.return %c : f64
             }
 
-            %tmp_r = sdir.get_access %tmp : !sdir.array<800x900xf64> -> !sdir.memlet<800x900xf64>
-            %tmp_w = sdir.get_access %tmp : !sdir.array<800x900xf64> -> !sdir.memlet<800x900xf64>
-            %A_a = sdir.get_access %A : !sdir.array<800x1100xf64> -> !sdir.memlet<800x1100xf64>
-            %B_a = sdir.get_access %B : !sdir.array<1100x900xf64> -> !sdir.memlet<1100x900xf64>
+            %tmp_r = sdir.get_access %tmp : !sdir.array<1600x1800xf64> -> !sdir.memlet<1600x1800xf64>
+            %tmp_w = sdir.get_access %tmp : !sdir.array<1600x1800xf64> -> !sdir.memlet<1600x1800xf64>
+            %A_a = sdir.get_access %A : !sdir.array<1600x2200xf64> -> !sdir.memlet<1600x2200xf64>
+            %B_a = sdir.get_access %B : !sdir.array<2200x1800xf64> -> !sdir.memlet<2200x1800xf64>
             %alpha_a = sdir.get_access %alpha : !sdir.array<f64> -> !sdir.memlet<f64>
            
-            %A_v = sdir.load %A_a[sym("i1"), sym("k1")] : !sdir.memlet<800x1100xf64> -> f64
+            %A_v = sdir.load %A_a[sym("i1"), sym("k1")] : !sdir.memlet<1600x2200xf64> -> f64
             %alpha_v = sdir.load %alpha_a[] : !sdir.memlet<f64> -> f64
             %0 = sdir.call @multA(%alpha_v, %A_v) : (f64, f64) -> f64
 
-            %B_v = sdir.load %B_a[sym("k1"), sym("j1")] : !sdir.memlet<1100x900xf64> -> f64
+            %B_v = sdir.load %B_a[sym("k1"), sym("j1")] : !sdir.memlet<2200x1800xf64> -> f64
             %1 = sdir.call @multB(%0, %B_v) : (f64, f64) -> f64
 
-            %tmp_v = sdir.load %tmp_r[sym("i1"), sym("j1")] : !sdir.memlet<800x900xf64> -> f64
+            %tmp_v = sdir.load %tmp_r[sym("i1"), sym("j1")] : !sdir.memlet<1600x1800xf64> -> f64
             %2 = sdir.call @add(%tmp_v, %1) : (f64, f64) -> f64
-            sdir.store %2, %tmp_w[sym("i1"), sym("j1")] : f64 -> !sdir.memlet<800x900xf64>
+            sdir.store %2, %tmp_w[sym("i1"), sym("j1")] : f64 -> !sdir.memlet<1600x1800xf64>
         }
 
         sdir.state @guard_36 {}
@@ -88,15 +88,15 @@ module {
                 sdir.return %c : f64
             }
 
-            %D_r = sdir.get_access %D : !sdir.array<800x1200xf64> -> !sdir.memlet<800x1200xf64>
-            %D_w = sdir.get_access %D : !sdir.array<800x1200xf64> -> !sdir.memlet<800x1200xf64>
+            %D_r = sdir.get_access %D : !sdir.array<1600x2400xf64> -> !sdir.memlet<1600x2400xf64>
+            %D_w = sdir.get_access %D : !sdir.array<1600x2400xf64> -> !sdir.memlet<1600x2400xf64>
             %beta_a = sdir.get_access %beta : !sdir.array<f64> -> !sdir.memlet<f64>
 
-            %D_v = sdir.load %D_r[sym("i2"), sym("j2")] : !sdir.memlet<800x1200xf64> -> f64
+            %D_v = sdir.load %D_r[sym("i2"), sym("j2")] : !sdir.memlet<1600x2400xf64> -> f64
             %beta_v = sdir.load %beta_a[] : !sdir.memlet<f64> -> f64
 
             %0 = sdir.call @mult(%D_v, %beta_v) : (f64, f64) -> f64
-            sdir.store %0, %D_w[sym("i2"), sym("j2")] : f64 -> !sdir.memlet<800x1200xf64>
+            sdir.store %0, %D_w[sym("i2"), sym("j2")] : f64 -> !sdir.memlet<1600x2400xf64>
         }
 
         sdir.state @guard_32 {}
@@ -112,18 +112,18 @@ module {
                 sdir.return %c : f64
             }
 
-            %tmp_a = sdir.get_access %tmp : !sdir.array<800x900xf64> -> !sdir.memlet<800x900xf64>
-            %C_a = sdir.get_access %C : !sdir.array<900x1200xf64> -> !sdir.memlet<900x1200xf64>
-            %D_r = sdir.get_access %D : !sdir.array<800x1200xf64> -> !sdir.memlet<800x1200xf64>
-            %D_w = sdir.get_access %D : !sdir.array<800x1200xf64> -> !sdir.memlet<800x1200xf64>
+            %tmp_a = sdir.get_access %tmp : !sdir.array<1600x1800xf64> -> !sdir.memlet<1600x1800xf64>
+            %C_a = sdir.get_access %C : !sdir.array<1800x2400xf64> -> !sdir.memlet<1800x2400xf64>
+            %D_r = sdir.get_access %D : !sdir.array<1600x2400xf64> -> !sdir.memlet<1600x2400xf64>
+            %D_w = sdir.get_access %D : !sdir.array<1600x2400xf64> -> !sdir.memlet<1600x2400xf64>
 
-            %tmp_v = sdir.load %tmp_a[sym("i2"), sym("k2")] : !sdir.memlet<800x900xf64> -> f64
-            %C_v = sdir.load %C_a[sym("k2"), sym("j2")] : !sdir.memlet<900x1200xf64> -> f64
-            %D_v = sdir.load %D_r[sym("i2"), sym("j2")] : !sdir.memlet<800x1200xf64> -> f64
+            %tmp_v = sdir.load %tmp_a[sym("i2"), sym("k2")] : !sdir.memlet<1600x1800xf64> -> f64
+            %C_v = sdir.load %C_a[sym("k2"), sym("j2")] : !sdir.memlet<1800x2400xf64> -> f64
+            %D_v = sdir.load %D_r[sym("i2"), sym("j2")] : !sdir.memlet<1600x2400xf64> -> f64
 
             %0 = sdir.call @mult(%tmp_v, %C_v) : (f64, f64) -> f64
             %1 = sdir.call @add(%D_v, %0) : (f64, f64) -> f64
-            sdir.store %1, %D_w[sym("i2"), sym("j2")] : f64 -> !sdir.memlet<800x1200xf64>
+            sdir.store %1, %D_w[sym("i2"), sym("j2")] : f64 -> !sdir.memlet<1600x2400xf64>
         }
 
         sdir.edge{assign=["i1: 0"]} @init -> @guard_18
