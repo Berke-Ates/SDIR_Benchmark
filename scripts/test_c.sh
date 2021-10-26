@@ -6,7 +6,7 @@
 cd $(dirname $0) # navigate to this folder
 echo "Running C benchmark..."
 
-clang "../benchmarks/C_2mm_builtin.c" -DPOLYBENCH_TIME -o "../gen/c_bench.out"
+clang -O3 "../benchmarks/C_2mm_builtin.c" -DPOLYBENCH_TIME -o "../gen/c_bench.out"
 
 for i in {1..3}
 do
