@@ -44,7 +44,7 @@ if __name__ == '__main__':
     auto_optimize(sdfg, dace.DeviceType.CPU)
     obj = sdfg.compile()
 
-    for i in range(10):
+    for i in range(100):
         t_0 = datetime.datetime.now()
         obj(ni,nj,nk,nl,tmp,A,B,C,D,alpha,beta)
         t_d = datetime.datetime.now() - t_0

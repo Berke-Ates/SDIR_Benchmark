@@ -149,10 +149,10 @@ module {
     }
 
     func @main() -> i32 {
-        %ni = arith.constant 1600 : index
-        %nj = arith.constant 1800 : index
-        %nk = arith.constant 2200 : index
-        %nl = arith.constant 2400 : index
+        %ni = arith.constant 800 : index
+        %nj = arith.constant 900 : index
+        %nk = arith.constant 1100 : index
+        %nl = arith.constant 1200 : index
 
         %alpha = arith.constant 1.5 : f64
         %beta = arith.constant 1.2 : f64

@@ -8,7 +8,7 @@ echo "Running affine.parallel benchmark..."
 
 ./affine_pipeline.sh "affine_parallel"
 
-for i in {1..10}
+for i in {1..100}
 do
   ../gen/affine_parallel.out >> "../logs/affine_parallel_benchmark.log"
 done
