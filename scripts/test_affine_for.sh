@@ -8,7 +8,7 @@ echo "Running affine.for benchmark..."
 
 ./affine_pipeline.sh "affine_for"
 
-for i in {1..3}
+for i in {1..10}
 do
   ../gen/affine_for.out >> "../logs/affine_for_benchmark.log"
 done
