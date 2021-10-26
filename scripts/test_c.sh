@@ -12,3 +12,5 @@ for i in {1..10}
 do
   ../gen/c_bench.out >> "../logs/c_benchmark.log"
 done
+
+python3 convert-ms.py
