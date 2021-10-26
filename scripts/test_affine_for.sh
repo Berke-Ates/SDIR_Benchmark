@@ -6,7 +6,7 @@
 cd $(dirname $0) # navigate to this folder
 echo "Running affine.for benchmark..."
 
-./affine_pipeline "affine_for"
+./affine_pipeline.sh "affine_for"
 
 for i in {1..3}
 do
