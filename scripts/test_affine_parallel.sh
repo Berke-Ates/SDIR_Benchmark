@@ -11,5 +11,6 @@ echo "Running affine.parallel benchmark..."
 for i in {1..100}
 do
   ../gen/affine_parallel.out >> "../logs/affine_parallel_benchmark.log"
+  echo "Done affine_parallel run: $i"
 done
 

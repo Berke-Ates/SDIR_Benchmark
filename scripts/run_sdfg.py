@@ -51,6 +51,8 @@ if __name__ == '__main__':
         
         with open("../logs/sdir_benchmark.log", "a") as logfile:
             logfile.write(str(round(t_d.total_seconds()*1000)) + "\n")
+        
+        print("Done SDFG run: ", str(i))
 
         #print(round(t_d.total_seconds()*1000), " ms")
         #print(round(D[0,0],6)) # Same precision as mlir

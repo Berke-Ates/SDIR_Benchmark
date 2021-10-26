@@ -11,6 +11,7 @@ clang -O3 -DLARGE_DATASET -DPOLYBENCH_TIME "../benchmarks/C_2mm_builtin.c" -o ".
 for i in {1..100}
 do
   ../gen/c_bench.out >> "../logs/c_benchmark.log"
+  echo "Done C run: $i"
 done
 
 python3 convert_ms.py

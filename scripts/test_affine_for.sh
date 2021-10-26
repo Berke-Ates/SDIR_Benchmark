@@ -11,4 +11,5 @@ echo "Running affine.for benchmark..."
 for i in {1..100}
 do
   ../gen/affine_for.out >> "../logs/affine_for_benchmark.log"
+  echo "Done affine_for run: $i"
 done
