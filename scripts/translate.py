@@ -15,7 +15,7 @@ if(result.returncode != 0):
 translated = result.stdout.decode('utf-8')
 translated_json = json.loads(translated)
 
-sdfg = SDFG.from_json(translated_json)
+sdfg = dace.SDFG.from_json(translated_json)
 sdfg.save(filename="../gen/sdir_2mm.sdfg", use_pickle=False, hash=None, exception=None)
 
 auto_optimize(sdfg, dace.DeviceType.CPU)
