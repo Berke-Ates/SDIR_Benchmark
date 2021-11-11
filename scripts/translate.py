@@ -7,7 +7,7 @@ import dace
 from dace.transformation.auto.auto_optimize import auto_optimize
 
 result = subprocess.run(['sdir-translate', '--mlir-to-sdfg', 
-                        "../benchmarks/sdir_2mm.mlir"], stdout=subprocess.PIPE)
+                        "../benchmarks/sdir_2mm_xl.mlir"], stdout=subprocess.PIPE)
 
 if(result.returncode != 0):
     exit(1)

@@ -6,7 +6,7 @@ cd $(dirname $0)/.. #navigate to root of repo
 name=$1
 
 # affine passes
-mlir-opt --affine-loop-tile "benchmarks/${name}_2mm.mlir" > "gen/${name}_opt1.mlir"
+mlir-opt --affine-loop-tile "benchmarks/${name}_2mm_xl.mlir" > "gen/${name}_opt1.mlir"
 mlir-opt --affine-loop-unroll-jam "gen/${name}_opt1.mlir" > "gen/${name}_opt2.mlir"
 mlir-opt --affine-loop-invariant-code-motion "gen/${name}_opt2.mlir" > "gen/${name}_opt3.mlir"
 mlir-opt --affine-super-vectorize "gen/${name}_opt3.mlir" > "gen/${name}_opt4.mlir"
