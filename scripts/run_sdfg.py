@@ -20,10 +20,10 @@ def init_arrays(ni,nj,nk,nl,A,B,C,D):
             D[i, j] = dace.float64(i * (j + 2) % nk) / nk
 
 if __name__ == '__main__':
-    ni = dace.int64(800)
-    nj = dace.int64(900)
-    nk = dace.int64(1100)
-    nl = dace.int64(1200)
+    ni = dace.int64(1600)
+    nj = dace.int64(1800)
+    nk = dace.int64(2200)
+    nl = dace.int64(2400)
 
     alpha = dace.float64(1.5)
     beta = dace.float64(1.2)
