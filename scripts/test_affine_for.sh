@@ -8,11 +8,6 @@ echo "Running affine.for benchmark..."
 
 ./affine_pipeline.sh "affine_for"
 
-../gen/affine_for.out >> /dev/null &
-PID=$!
-echo $PID
-exit 0
-
 for i in {1..100}
 do
   ../gen/affine_for.out >> "../logs/affine_for_benchmark.log"
